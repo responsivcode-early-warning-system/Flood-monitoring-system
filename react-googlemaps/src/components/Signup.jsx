@@ -1,9 +1,9 @@
-import React, {useState} from 'react ';
+import React, {useState} from 'react';
 
 
-function SignupComponent(props) {
+function SignupForm(props) {
 
-    const [username, setusername] = useStat('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -33,13 +33,13 @@ function SignupComponent(props) {
             </label>
             <label>
                 Pasword:
-                <input type="text" value ={email} onChange={(event)=> setPasword(event.target.value)} />
+                <input type="text" value ={email} onChange={(event)=> setPassword(event.target.value)} />
             </label>
         </form>
     )
 }
  
 
-export default Signup;
+export default SignupForm;
 
 

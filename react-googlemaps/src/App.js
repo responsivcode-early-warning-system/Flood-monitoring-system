@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React from 'react';
+import Home from './components/Home';
+import Navbar from './components/Navbar.jsx';
+import SignupForm from './components/Signup.jsx'; // Remove the comment and import the SignupForm component
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-};
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route exact path="/" element={<Home />} /> 
+            <Route exact path="/signup" element={<SignupForm />} /> 
 
-export class MapContainer extends Component {
-  render() {
-    return (
-      <Map
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={
-          {
-            lat: -1.2884,
-            lng: 36.8233
-          }
-        }
-      />
-    );
-  }
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBP4935sgIDwKy6UFmDSchMGBv9zesXlvQ'
-})(MapContainer);
+export default App;
