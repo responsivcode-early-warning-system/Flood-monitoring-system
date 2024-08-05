@@ -1,13 +1,11 @@
-const express = require('express');
-const app =express();   
+var mysql = require("mysql2");
 
-app.get('/', (req, res) => {
-    res.send("Welcome to my awesome app!"); 
-
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "testing1",
 
 });
 
-app.listen(3000, function () {
-
-    console.log("Listening on port 3000...");     
-})
+module.exports= con;
