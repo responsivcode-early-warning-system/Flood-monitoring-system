@@ -11,9 +11,9 @@ function App() {
         <Navbar />
         <div className="content">
           <Routes>
-            <Route exact path="/" element={<Home />} /> 
-            <Route exact path="/signup" element={<SignupForm />} /> 
 
+            <Route exact path="/" element={<Home />} /> 
+            <Route exact path="/signup" element={<SignupForm/>} /> 
           </Routes>
         </div>
       </div>
