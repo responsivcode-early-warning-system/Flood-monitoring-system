@@ -1,92 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
+function SignupForm() {
+    const [formData, setFormData] = useState({
+        firstName: '', middleName: '', lastName: '', contact: '', email: '', password: ''
+    });
 
-function SignupForm(props) {
-
-    const [firstName, setFirstName] = useState('');
-    const [middleName, setMiddleName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [contact, setContact] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
 
     const handleSubmit = (event) => {
-        event.preventDefault(); 
-
-        console.log('Username: ' , username);   
-        console.log('Email: ' , email);
-        console.log('Password: ' , password);   
-
-
+        event.preventDefault();
+        console.log('Form Data:', formData);
     };
 
     return (
-
-        <form onSubmit= {handleSubmit}>
-           <label>
-                First Name:
-                <input 
-                    type="text" 
-                    value={firstName} 
-                    onChange={(event) => setFirstName(event.target.value)} 
-                />
-            </label>
-            <br />
-
-            <label>
-                Middle Name:
-                <input 
-                    type="text" 
-                    value={middleName} 
-                    onChange={(event) => setMiddleName(event.target.value)} 
-                />
-            </label>
-            <br />
-
-            <label>
-                Last Name:
-                <input 
-                    type="text" 
-                    value={lastName} 
-                    onChange={(event) => setLastName(event.target.value)} 
-                />
-            </label>
-            <br />
-
-            <label>
-                Contact:
-                <input 
-                    type="tel" 
-                    value={contact} 
-                    onChange={(event) => setContact(event.target.value)} 
-                />
-            </label>
-            <br />
-
-            <label>
-                Email:
-                <input 
-                    type="email" 
-                    value={email} 
-                    onChange={(event) => setEmail(event.target.value)} 
-                />
-            </label>
-            <br />
-
-            <label>
-                Password:
-                <input 
-                    type="password" 
-                    value={password} 
-                    onChange={(event) => setPassword(event.target.value)} 
-                />
-            </label>
+        <form onSubmit={handleSubmit}>
+            <label>First Name: <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} /></label><br />
+            <label>Middle Name: <input type="text" name="middleName" value={formData.middleName} onChange={handleChange} /></label><br />
+            <label>Last Name: <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} /></label><br />
+            <label>Contact: <input type="tel" name="contact" value={formData.contact} onChange={handleChange} /></label><br />
+            <label>Email: <input type="email" name="email" value={formData.email} onChange={handleChange} /></label><br />
+            <label>Password: <input type="password" name="password" value={formData.password} onChange={handleChange} /></label><br />
+            <button type="submit">Submit</button>
         </form>
-    )
+    );
 }
- 
 
 export default SignupForm;
-
-
