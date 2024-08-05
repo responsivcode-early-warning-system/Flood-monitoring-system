@@ -1,17 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const app =express();   
-const port = 3000;
+var mysql = require("mysql2");
 
-app.use(cors());
-app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.send("Welcome to my awesome app!"); 
-
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "testing1",
 
 });
 
-app.listen(port, () =>{
-    console.log(`Listening on port ${port}...`);     
-})
+module.exports= con;

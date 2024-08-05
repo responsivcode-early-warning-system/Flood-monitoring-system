@@ -25,7 +25,7 @@ function Home() {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Flood Monitoring System
               </Typography>
-              <Button component={Link} to="/signup" color="inherit" >Signup</Button>
+              <Button to='/signup'>Signup</Button>
             </Toolbar>
           </AppBar>
         </Box>
