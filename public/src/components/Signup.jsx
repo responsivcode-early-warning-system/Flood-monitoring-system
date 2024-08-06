@@ -1,41 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import axios from 'axios';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
+    username: '',
+    firstname: '',
+    middlename: '',
+    lastname: '',
+    contact: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    passwordConfirm: '',
   });
 
+ 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your form submission logic here
-    console.log(formData);
-    axios.post('https://localhost:3000/register', formData)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  };
-
+  event.preventDefault();
+  // Add your form submission logic here
+  if (formData.password !== formData.passwordConfirm) {
+    alert('Passwords do not match');
+    return;
+  }
+  console.log(formData);
+  axios.post(`http://localhost:7000/register`, formData)
+    .then(response => {
+      console.log(response);
+      // Handle successful registration
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle registration error
+    });
+};
+    
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
       <div>
         <label>First Name:</label>
         <input
           type="text"
-          name="firstName"
-          value={formData.firstName}
+          name="firstname"
+          value={formData.firstname}
           onChange={handleInputChange}
           required
         />
@@ -44,8 +64,8 @@ const RegistrationForm = () => {
         <label>Middle Name:</label>
         <input
           type="text"
-          name="middleName"
-          value={formData.middleName}
+          name="middlename"
+          value={formData.middlename}
           onChange={handleInputChange}
           required
         />
@@ -54,8 +74,18 @@ const RegistrationForm = () => {
         <label>Last Name:</label>
         <input
           type="text"
-          name="lastName"
-          value={formData.lastName}
+          name="lastname"
+          value={formData.lastname}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Contact:</label>
+        <input
+          type="contact"
+          name="contact"
+          value={formData.contact}
           onChange={handleInputChange}
           required
         />
@@ -84,8 +114,8 @@ const RegistrationForm = () => {
         <label>Confirm Password:</label>
         <input
           type="password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
+          name="passwordConfirm"
+          value={formData.passwordConfirm}
           onChange={handleInputChange}
           required
         />
