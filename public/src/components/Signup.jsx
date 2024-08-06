@@ -19,6 +19,13 @@ const RegistrationForm = () => {
     event.preventDefault();
     // Add your form submission logic here
     console.log(formData);
+    axios.post('https://localhost:3000/register', formData)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   };
 
   return (
