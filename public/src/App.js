@@ -8,16 +8,19 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
-        <div className="content">
-          <Routes>
-            {/* <Route exact path="/" element={<Home />} /> */}
+          <Navbar />
+            <div className="content">
+        <Routes>
             <Route exact path="/" element={<Home />} /> 
-          </Routes>
-        </div>
+            <Route exact path="/signup" element={<RegistrationForm/>} /> 
+        </Routes>
+            </div>
       </div>
     </Router>
   );
 }
 
 export default App;
+
+// TODO: </Routes><Router exact path='/map'element={</>}/>
+

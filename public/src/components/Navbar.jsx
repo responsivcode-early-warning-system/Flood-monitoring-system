@@ -23,9 +23,18 @@ function Home() {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Flood Monitoring System
+                <Link to='/'>
+                  Flood Monitoring System
+                </Link>
               </Typography>
-              <Button color='inherit' component={Link} to='/singup'>Signup</Button>
+              <Link>
+                <Button color='inherit' style={{color:'white'}}>Map</Button>
+              </Link>
+              
+              
+                  <Link to='/signup'>
+                <Button color='inherit' style={{color:'white'}}>Signup</Button>
+              </Link>
             </Toolbar>
           </AppBar>
         </Box>
