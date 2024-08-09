@@ -1,0 +1,85 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+import { HttpService } from '@nestjs/axios';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MoreThanOrEqual, Repository } from 'typeorm';
+import { Otp } from './entities/otp.entity';
+const otpGenerator = require('otp-generator')
+
+@Injectable()
+export class OtpService {
+
+  constructor(
+    @InjectRepository(Otp) private readonly repo: Repository<Otp>,
+    private config: ConfigService,
+    private httpService: HttpService,
+  ) {
+  }
+
+  async sendOTP(mobile: string) {
+    try {
+      // GENERATE CODE
+      const code = otpGenerator.generate(6, {
+        digits: true,
+        lowerCaseAlphabets: false,
+        specialChars: false,
+        upperCaseAlphabets: false
+      });
+
+      // SEND OTP
+      this.httpService.post("https://api.semaphore.co/api/v4/otp", {
+        apikey: "4d06c95cff331a0c1a230e89f0e6158d",
+        message: `Your One Time Password is: {otp}. Please use it within 5 minutes.`,
+        number: mobile,
+        code: code
+      }).subscribe((x) => {
+        console.log(x)
+      });
+
+      // GENERATE EXPIRY 5Mins 
+      const d1 = new Date();
+      const d2 = new Date(d1);
+      d2.setMinutes(d1.getMinutes() + 5);
+      const otp = await this.repo.create({
+        mobile: mobile,
+        code,
+        expire_at: d2
+      });
+      // Save OTP
+      await this.repo.save(otp);
+      return otp;
+    } catch (error) {
+      throw new RpcException(error);
+    }
+  }
+
+  async verifyCode(mobile: string, code: string) {
+    try {
+      const current = new Date();
+      const model = await this.repo.findOne({
+        where: {
+          mobile: mobile,
+          code: code,
+          expire_at: MoreThanOrEqual(current)
+        }
+      });
+      if (!model) {
+        return {
+          "mobile": mobile,
+          "code": "Invalid Code",
+          "expire_at": ""
+        };
+      }
+      // Delete all existing OTP
+      const allOtp = await this.repo.find({ where: { mobile } });
+      await this.repo.remove(allOtp);
+      delete model['id'];
+      return model;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+}
