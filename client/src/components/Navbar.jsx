@@ -27,12 +27,10 @@ function Home() {
                   Flood Monitoring System
                 </Link>
               </Typography>
-              <Link>
+              <Link to='/map'>
                 <Button color='inherit' style={{color:'white'}}>Map</Button>
               </Link>
-              
-              
-                  <Link to='/signup'>
+              <Link to='/signup'>
                 <Button color='inherit' style={{color:'white'}}>Signup</Button>
               </Link>
             </Toolbar>

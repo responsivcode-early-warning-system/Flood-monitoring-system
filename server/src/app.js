@@ -4,6 +4,7 @@ const cors = require('cors');
 var con = require('./server.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+require('dotenv').config()
 
 app.use(cors());
 app.use(express.json());
@@ -56,7 +57,7 @@ app.post('/register', (req, res) => {
   });
 });
 
-const port = process.env.PORT || 7000; // You can use environment variables for port configuration
+const port = process.env.BACKEND_APP_PORT; // You can use environment variables for port configuration
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
