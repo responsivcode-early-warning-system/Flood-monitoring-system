@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
-import { Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button, Container,Grid } from '@mui/material';
+
+
 
 const themeColors = [
   "#00ff00", // Normal (Green)
@@ -22,8 +23,8 @@ const themes = themeColors.map((color, index) => ({
 
 
 const mapStyles = {
-  width: '80%',
-  height: '70%',
+  width: '100%',
+  height: '100%',  
   padding: 20, 
   margin: '20px auto'
 };
@@ -42,14 +43,16 @@ export class MapContainer extends Component {
             lng: 36.8233
           }
         }
-      >
-        <Button variant='contained' style={themes[0]}>Normal</Button>
-        <Button variant='contained' style={themes[1]}>Low</Button>
-        <Button variant='contained' style={themes[2]}>Medium</Button>
-        <Button variant='contained' style={themes[3]}>High</Button>
-        <Button variant='contained' style={themes[4]}>Extreme</Button>
-      </Map>
+        >
+         <Container maxWidth="md" style={{ position: 'absolute', bottom: 75, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10}}>
+            <Button variant='contained' style={themes[0]}>Normal</Button>
+            <Button variant='contained' style={themes[1]}>Low</Button>
+            <Button variant='contained' style={themes[2]}>Medium</Button>
+            <Button variant='contained' style={themes[3]}>High</Button>
+            <Button variant='contained' style={themes[4]}>Extreme</Button>
+        </Container>
 
+        </Map>
     );
   }
 }
