@@ -1,0 +1,27 @@
+{
+ "DATA_TYPE" : "1",
+ "DEVICE_ID" : "DEV001",
+ "SENSOR_DATETIME" : "2023-01-03 12:35:45",
+ "DIST_CM" : "4134",
+ "DIST_MM" : "41338",
+ "MEAS_STAT" : "123",
+ "Longitude":,
+ "Lattiude":
+}
+
+{
+    "DATA_TYPE" : "1",
+    "DEVICE_ID" : "DEV001",
+    "SENSOR_DATETIME" : "2023-01-03 12:35:45",
+    "DIST_CM" : "4134",
+    "DIST_MM" : "41338",
+    "MEAS_STAT" : "123",
+    "Longitude": 123.9162666,
+    "Latitude": 10.3406425
+}
+
+
+level 1 - 10//normal
+level 2 - 15 //low
+level 3 - 20
+
