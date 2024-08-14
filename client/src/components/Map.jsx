@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import { Button, Container } from '@mui/material';
 
+
 const themeColors = [
   "#00ff00", // Normal (Green)
   "#ffff00", // Low (Yellow)
@@ -22,7 +23,6 @@ const themes = themeColors.map((color, index) => ({
 const mapStyles = {
   width: '95%',
   height: '80%',  
-  padding: 20, 
   margin: '20px auto'
 };
 
@@ -30,8 +30,6 @@ const initposition = {
   lat:10.310530313219541, 
   lng:123.89366616608562
 }
-
-
 
 export class MapContainer extends Component {
   render() {
@@ -42,9 +40,14 @@ export class MapContainer extends Component {
         style={mapStyles}
         initialCenter={initposition}
         >   
-        <Marker position={initposition} >
+        <Marker
+          position={initposition}
+          icon={{
+            url: "https://maps.google.com/mapfiles/kml/shapes/placemark_circle.png",
+            scaledSize: new window.google.maps.Size(30, 30)
+          }}>
         </Marker>
-
+  
         <Container maxWidth="md" style={{ position: 'absolute', bottom: 75, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10}}>
             <Button variant='contained' style={themes[0]} >Normal</Button>
             <Button variant='contained' style={themes[1]} >Low</Button>
