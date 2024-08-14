@@ -14,6 +14,52 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello, Express.js Server!</h1>');
 });
 
+function getbyLvl(sql, res){
+  con.query(sql, function(err, result) {
+    if (err) {
+      console.error('Database query error:', err);
+      res.status(500).json({ error: 'Database query error' });
+      return;
+    }
+    console.log(result);
+    res.json(result);
+  });
+}
+
+app.get('/:level', (req, res) => {
+  const { level } = req.params;
+  let distance;
+
+  switch (level) {
+    case 'normal':
+      min=0;
+      max = 5;
+      break;
+    case 'low':
+      min = 6;
+      max=10;
+      break;
+    case 'medium':
+      min = 11;
+      max=15;
+      break;
+    case 'high':
+      min = 16;
+      max=20;
+      break;
+    case 'extreme':
+      min = 21;
+      max=40;
+      break;
+    default:
+      return res.status(400).json({ message: 'Invalid level parameter' });
+  }
+
+  const sql = `SELECT lattitude, longitude FROM sensors WHERE DIST_M BETWEEN ${min} AND ${max} `;
+  getbyLvl(sql, res);
+});
+
+
 
 app.post('/register', (req, res) => {
   const { username, firstname, middlename, lastname, contact, email, password, passwordConfirm } = req.body;
@@ -57,7 +103,7 @@ app.post('/register', (req, res) => {
   });
 });
 
-const port = process.env.BACKEND_APP_PORT; // You can use environment variables for port configuration
+const port = process.env.PORT; // You can use environment variables for port configuration
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
