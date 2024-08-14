@@ -33,6 +33,9 @@ function Home() {
               <Link to='/signup'>
                 <Button color='inherit' style={{color:'white'}}>Signup</Button>
               </Link>
+              <Link to='/test'>
+                <Button color='inherit' style={{color:'white'}}>Test</Button>
+              </Link>
             </Toolbar>
           </AppBar>
         </Box>

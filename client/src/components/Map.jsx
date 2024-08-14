@@ -6,6 +6,7 @@ import lowIcon from '../icons/gps(1).png';
 import mediumIcon from '../icons/gps(2).png';
 import highIcon from '../icons/gps(3).png';
 import extremeIcon from '../icons/gps(4).png';
+import { Popper } from '@mui/base/Popper';
 
 const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
 
@@ -15,9 +16,9 @@ const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
 const themeColors = [
   "#04dc04", // Normal (Green)
   "#fcfc04", // Low (Yellow)
-  "#ffa500", // Medium (Red)
-  "#fc3c04", // High (Purple)
-  "#e404fc"  // Extreme (Blue)
+  "#ffa500", // Medium (Orange)
+  "#fc3c04", // High (Red)
+  "#e404fc"  // Extreme (Purple)
 ];
 
 
@@ -87,3 +88,4 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyBP4935sgIDwKy6UFmDSchMGBv9zesXlvQ'
 })(MapContainer);
+
