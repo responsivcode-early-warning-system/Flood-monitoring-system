@@ -13,11 +13,11 @@ const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
 
 
 const themeColors = [
-  "#00ff00", // Normal (Green)
-  "#ffff00", // Low (Yellow)
+  "#04dc04", // Normal (Green)
+  "#fcfc04", // Low (Yellow)
   "#ffa500", // Medium (Red)
-  "#ff0000", // High (Purple)
-  "#800080"  // Extreme (Blue)
+  "#fc3c04", // High (Purple)
+  "#e404fc"  // Extreme (Blue)
 ];
 
 
