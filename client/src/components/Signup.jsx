@@ -48,7 +48,7 @@ const RegistrationForm = () => {
           <Paper elevation={10} style={paperStyle}>
           <Avatar><AppRegistrationOutlinedIcon color="primary"/></Avatar>
            Registration
-          <form onSubmit={handleSubmit}>
+          <form>
               <div>
                 <label>Username:</label>
                 <input
@@ -129,7 +129,7 @@ const RegistrationForm = () => {
                   required
                   />
               </div>
-              <Button onClick=''>Submit</Button>
+              <Button onClick={handleSubmit}>Submit</Button>
             </form> 
           </Paper>
         </Grid>
