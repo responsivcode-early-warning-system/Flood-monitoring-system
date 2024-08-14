@@ -1,6 +1,15 @@
 import React, { Component, useState } from 'react';
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import { Button, Container } from '@mui/material';
+import normalIcon from '../icons/gps.png';
+import lowIcon from '../icons/gps(1).png';
+import mediumIcon from '../icons/gps(2).png';
+import highIcon from '../icons/gps(3).png';
+import extremeIcon from '../icons/gps(4).png';
+
+const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
+
+
 
 
 const themeColors = [
@@ -10,6 +19,8 @@ const themeColors = [
   "#ff0000", // High (Purple)
   "#800080"  // Extreme (Blue)
 ];
+
+
 
 // Update the theme object with the new colors
 const themes = themeColors.map((color, index) => ({
@@ -31,6 +42,15 @@ const initposition = {
   lng:123.89366616608562
 }
 
+const initPositions = [
+  { lat: 10.310530313219541, lng: 123.89366616608562 },
+  { lat: 10.311023456789012, lng: 123.89415930965509 },
+  { lat: 10.311516600358483, lng: 123.89465245322456 },
+  // Add more entries as needed
+  { lat: 10.312009743927954, lng: 123.89514559679506 }, // New position nearby
+  { lat: 10.312502887497425, lng: 123.89563874036453 }, // Another new position nearby
+];
+
 export class MapContainer extends Component {
   render() {
     return (
@@ -40,13 +60,16 @@ export class MapContainer extends Component {
         style={mapStyles}
         initialCenter={initposition}
         >   
-        <Marker
-          position={initposition}
-          icon={{
-            url: "https://maps.google.com/mapfiles/kml/shapes/placemark_circle.png",
-            scaledSize: new window.google.maps.Size(30, 30)
-          }}>
-        </Marker>
+        {initPositions.map((position, index) => (
+          <Marker
+            key={index}
+            position={position}
+            icon={{
+              url: markerIcons[index],
+              scaledSize: new window.google.maps.Size(30, 30)
+            }}
+          />
+        ))}
   
         <Container maxWidth="md" style={{ position: 'absolute', bottom: 75, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10}}>
             <Button variant='contained' style={themes[0]} >Normal</Button>
@@ -64,5 +87,3 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyBP4935sgIDwKy6UFmDSchMGBv9zesXlvQ'
 })(MapContainer);
-
-
