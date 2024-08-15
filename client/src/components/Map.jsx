@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import { Button, Container } from '@mui/material';
 import normalIcon from '../icons/gps.png';
@@ -6,12 +6,9 @@ import lowIcon from '../icons/gps(1).png';
 import mediumIcon from '../icons/gps(2).png';
 import highIcon from '../icons/gps(3).png';
 import extremeIcon from '../icons/gps(4).png';
-import { Popper } from '@mui/base/Popper';
-
+import axios from 'axios';
+import TemporaryDrawer from './Test';
 const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
-
-
-
 
 const themeColors = [
   "#04dc04", // Normal (Green)
@@ -20,8 +17,6 @@ const themeColors = [
   "#fc3c04", // High (Red)
   "#e404fc"  // Extreme (Purple)
 ];
-
-
 
 // Update the theme object with the new colors
 const themes = themeColors.map((color, index) => ({
@@ -52,7 +47,21 @@ const initPositions = [
   { lat: 10.312502887497425, lng: 123.89563874036453 }, // Another new position nearby
 ];
 
+const handleClick = (level) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:7000/${level}`)
+      .then(response => {
+        
+        console.log(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 export class MapContainer extends Component {
+
   render() {
     return (
       <Map 
@@ -73,7 +82,7 @@ export class MapContainer extends Component {
         ))}
   
         <Container maxWidth="md" style={{ position: 'absolute', bottom: 75, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10}}>
-            <Button variant='contained' style={themes[0]} >Normal</Button>
+            <Button variant='contained' style={themes[0]} onClick={() => handleClick('normal')}>Normal</Button>
             <Button variant='contained' style={themes[1]} >Low</Button>
             <Button variant='contained' style={themes[2]} >Medium</Button>
             <Button variant='contained' style={themes[3]} >High</Button>
