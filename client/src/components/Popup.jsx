@@ -52,7 +52,7 @@ const usePopupState = () => {
       </BasePopup>
     );
   };
-  return { anchor, handleClick, open, id, Popup };
+  return { handleClick, Popup };
 };
 
 export default usePopupState;

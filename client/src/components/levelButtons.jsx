@@ -26,7 +26,8 @@ const themeColors = [
 
 const LevelButtons = () => {
 
-    const { anchor, handleClick, open, id, Popup } = usePopupState(); // Use the custom hook
+    const { handleClick,  Popup } = usePopupState(); // Use the custom hook
+
 
 
   // ... (rest of the code)
@@ -48,11 +49,11 @@ const LevelButtons = () => {
     return (
     <Container maxWidth="md" style={{ position: 'absolute', bottom: 75, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10 }}>
 
-        <Button aria-describedby={id} type="button" variant='contained' style={themes[0]} onClick={(event) => handleClick(event, 'normal')}>Normal</Button>
-        <Button aria-describedby={id} type="button" variant='contained' style={themes[1]} onClick={(event) => handleClick(event, 'low')}>Low</Button>
-        <Button aria-describedby={id} type="button" variant='contained' style={themes[2]} onClick={(event) => handleClick(event, 'medium')}>Medium</Button>
-        <Button aria-describedby={id} type="button" variant='contained' style={themes[3]} onClick={(event) => handleClick(event, 'high')}>High</Button>
-        <Button aria-describedby={id} type="button" variant='contained' style={themes[4]} onClick={(event) => handleClick(event, 'extreme')}>Extreme</Button>
+        <Button type="button" variant='contained' style={themes[0]} onClick={(event) => handleClick(event, 'normal')}>Normal</Button>
+        <Button type="button" variant='contained' style={themes[1]} onClick={(event) => handleClick(event, 'low')}>Low</Button>
+        <Button type="button" variant='contained' style={themes[2]} onClick={(event) => handleClick(event, 'medium')}>Medium</Button>
+        <Button type="button" variant='contained' style={themes[3]} onClick={(event) => handleClick(event, 'high')}>High</Button>
+        <Button type="button" variant='contained' style={themes[4]} onClick={(event) => handleClick(event, 'extreme')}>Extreme</Button>
 
         <Popup>
             asdasdfasdf
