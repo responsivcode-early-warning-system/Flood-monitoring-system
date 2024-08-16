@@ -2,25 +2,6 @@ import * as React from 'react';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { styled } from '@mui/system';
 
-export default function SimplePopup() {
-  const [anchor, setAnchor] = React.useState(null);
-
-  const pophandleClick = (event) => {
-    setAnchor(anchor ? null : event.currentTarget);
-  };
-
-  const open = Boolean(anchor);
-  const id = open ? 'simple-popup' : undefined;
-
-  return (
-    <div>
-      <Button variant='contained' aria-describedby={id} type="button" onClick={handleClick}>Low</Button>
-      <BasePopup id={id} open={open} anchor={anchor}>
-        <PopupBody>The content of the Popup.</PopupBody>
-      </BasePopup>
-    </div>
-  );
-}
 
 const grey = {
   50: '#F3F6F9',
@@ -33,15 +14,6 @@ const grey = {
   700: '#434D5B',
   800: '#303740',
   900: '#1C2025',
-};
-
-const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
 };
 
 const PopupBody = styled('div')(
@@ -63,4 +35,24 @@ const PopupBody = styled('div')(
   z-index: 1;
 `,
 );
+const usePopupState = () => {
+  const [anchor, setAnchor] = React.useState(null);
 
+  const handleClick = (event) => {
+    setAnchor(anchor ? null : event.currentTarget);
+  };
+
+  const open = Boolean(anchor);
+  const id = open ? 'simple-popup' : undefined;
+
+  const Popup = ({ children }) => {
+    return (
+      <BasePopup id={id} open={open} anchor={anchor}>
+        <PopupBody>{children}</PopupBody>
+      </BasePopup>
+    );
+  };
+  return { anchor, handleClick, open, id, Popup };
+};
+
+export default usePopupState;

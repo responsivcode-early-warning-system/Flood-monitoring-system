@@ -4,14 +4,19 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 
-
-export default function TemporaryDrawer() {
+const TemporaryDrawer= (props) => {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
+  React.useEffect(() => {
+    if (props.openDrawer) {
+      setOpen(true);
+    }
+  }, [props.openDrawer]);
+  
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
@@ -22,10 +27,12 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </div>
   );
 }
+
+
+export default TemporaryDrawer;
