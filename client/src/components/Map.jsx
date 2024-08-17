@@ -34,6 +34,7 @@ export class MapContainer extends Component {
     super(props);
     this.state = {};
   }
+  
   render() {
     return (
       <Map 
@@ -52,7 +53,6 @@ export class MapContainer extends Component {
             }}
           />
         ))}
-
         <LevelButtons />
         
         </Map>
