@@ -53,6 +53,12 @@ const usePopupState = () => {
 
  
 
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+    const toggleDrawer = (newOpen) => () => {
+      setDrawerOpen(newOpen);
+    };
+
   const Popup = ({ children }) => {
     return (
       <BasePopup id={id} open={open} anchor={anchor} onClick={toggleDrawer(!drawerOpen)}>
