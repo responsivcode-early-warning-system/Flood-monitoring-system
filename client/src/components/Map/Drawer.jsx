@@ -11,14 +11,14 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 const TemporaryDrawer = ({ open, onToggleDrawer }) => {
-  const [drawerOpen2, setDrawerOpen2] = useState(false);
+  const [drawerFetch, setDrawerFetch] = useState(false);
   const toggleDrawer = (newOpen) => () => {
-      setDrawerOpen2(newOpen);
+      setDrawerFetch(newOpen);
     };
 
   useEffect(() => {
     toggleDrawer(open)();
-    if (drawerOpen2) {
+    if (drawerFetch) {
       console.log("Drawer is open");
     }
     
@@ -57,7 +57,7 @@ const TemporaryDrawer = ({ open, onToggleDrawer }) => {
 
   return (
     <div>
-      <Drawer open={drawerOpen2} onClose={onToggleDrawer(false)}>
+      <Drawer open={drawerFetch} onClose={onToggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </div>
