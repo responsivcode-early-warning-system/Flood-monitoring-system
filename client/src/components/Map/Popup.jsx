@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { styled } from '@mui/system';
+import TemporaryDrawer from './Drawer';
 
 
 const grey = {
@@ -36,22 +37,32 @@ const PopupBody = styled('div')(
 `,
 );
 const usePopupState = () => {
-  const [anchor, setAnchor] = React.useState(null);
-
+  const [anchor, setAnchor] = useState(null);
+  const open = Boolean(anchor);
+  const id = open ? 'simple-popup' : undefined;
   const handleClick = (event) => {
     setAnchor(anchor ? null : event.currentTarget);
   };
 
-  const open = Boolean(anchor);
-  const id = open ? 'simple-popup' : undefined;
+  
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+      setDrawerOpen(newOpen);
+    };
+
+ 
 
   const Popup = ({ children }) => {
     return (
-      <BasePopup id={id} open={open} anchor={anchor}>
+      <BasePopup id={id} open={open} anchor={anchor} onClick={toggleDrawer(!drawerOpen)}>
+        <TemporaryDrawer open={drawerOpen} onToggleDrawer={toggleDrawer} />
         <PopupBody>{children}</PopupBody>
       </BasePopup>
     );
   };
+
+  
   return { handleClick, Popup };
 };
 

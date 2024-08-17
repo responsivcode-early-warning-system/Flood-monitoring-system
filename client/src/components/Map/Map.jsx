@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import LevelButtons  from './levelButtons';
-import normalIcon from '../icons/gps.png';
-import lowIcon from '../icons/gps(1).png';
-import mediumIcon from '../icons/gps(2).png';
-import highIcon from '../icons/gps(3).png';
-import extremeIcon from '../icons/gps(4).png';
+import normalIcon from './icons/gps.png';
+import lowIcon from './icons/gps(1).png';
+import mediumIcon from './icons/gps(2).png';
+import highIcon from './icons/gps(3).png';
+import extremeIcon from './icons/gps(4).png';
 
 const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
 
@@ -34,6 +34,7 @@ export class MapContainer extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
     return (
       <Map 
@@ -52,7 +53,6 @@ export class MapContainer extends Component {
             }}
           />
         ))}
-
         <LevelButtons />
         
         </Map>
