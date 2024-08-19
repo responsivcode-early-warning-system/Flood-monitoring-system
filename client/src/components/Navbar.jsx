@@ -7,11 +7,15 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import dotenv from 'dotenv';
+
+// Import the .env file
+
 function Home() {
 
     return (
           <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
+          <AppBar position="static" style={{color: "#ff4d4d", backgroundColor:"#00ccff"}}>
             <Toolbar>
               <IconButton
                 size="large"
