@@ -31,23 +31,23 @@ app.get('/:level', (req, res) => {
   let distance;
 
   switch (level) {
-    case 'normal':
+    case 'Normal':
       min=0;
       max = 5;
       break;
-    case 'low':
+    case 'Low':
       min = 6;
       max=10;
       break;
-    case 'medium':
+    case 'Medium':
       min = 11;
       max=15;
       break;
-    case 'high':
+    case 'High':
       min = 16;
       max=20;
       break;
-    case 'extreme':
+    case 'Extreme':
       min = 21;
       max=40;
       break;

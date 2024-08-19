@@ -9,8 +9,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import axios from 'axios';
 
-const TemporaryDrawer = ({ open, onToggleDrawer }) => {
+
+const TemporaryDrawer = ({ open, onToggleDrawer, level }) => {
   const [drawerFetch, setDrawerFetch] = useState(false);
   const toggleDrawer = (newOpen) => () => {
       setDrawerFetch(newOpen);
@@ -19,7 +21,19 @@ const TemporaryDrawer = ({ open, onToggleDrawer }) => {
   useEffect(() => {
     toggleDrawer(open)();
     if (drawerFetch) {
-      console.log("Drawer is open");
+      const handlePopClick = () => {
+        return new Promise((resolve, reject) => {
+            axios.get(`http://localhost:7000/${level}`)
+              .then(response => {
+                
+                console.log(response.data);
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+      };
+      console.log(handlePopClick());
     }
     
   }, [open, toggleDrawer]);

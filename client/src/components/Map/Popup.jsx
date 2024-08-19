@@ -36,34 +36,35 @@ const PopupBody = styled('div')(
   z-index: 1;
 `,
 );
+
+
 const usePopupState = () => {
   const [anchor, setAnchor] = useState(null);
+ const [poptext, setPoptext] = useState('');
+
   const open = Boolean(anchor);
   const id = open ? 'simple-popup' : undefined;
-  const handleClick = (event) => {
+  const handleClick = (event, level) => {
     setAnchor(anchor ? null : event.currentTarget);
+    setPoptext(`${level}`);
   };
-
-  
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = (newOpen) => () => {
       setDrawerOpen(newOpen);
     };
 
-
-
-  const Popup = ({ children }) => {
+  const Popup = () => {
     return (
       <BasePopup id={id} open={open} anchor={anchor} onClick={toggleDrawer(!drawerOpen)}>
-        <TemporaryDrawer open={drawerOpen} onToggleDrawer={toggleDrawer} />
-        <PopupBody>{children}</PopupBody>
+        <TemporaryDrawer open={drawerOpen} onToggleDrawer={toggleDrawer} level={poptext}/>
+        <PopupBody>{poptext}</PopupBody>
       </BasePopup>
     );
   };
 
   
-  return { handleClick, Popup };
+  return {handleClick, Popup};
 };
 
 export default usePopupState;

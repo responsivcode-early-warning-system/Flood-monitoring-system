@@ -4,7 +4,6 @@ import { Button, Container } from '@mui/material';
 import usePopupState from './Popup';
 
 
-import axios from 'axios';
 
 const themeColors = [
     "#04dc04", // Normal (Green)
@@ -31,18 +30,7 @@ const LevelButtons = () => {
     
     
   // ... (rest of the code)
-    const handlePopClick = (level) => {
-        return new Promise((resolve, reject) => {
-            axios.get(`http://localhost:7000/${level}`)
-              .then(response => {
-                
-                console.log(response.data);
-              })
-              .catch(error => {
-                reject(error);
-              });
-          });
-      };
+    
     
     
 
@@ -51,15 +39,13 @@ const LevelButtons = () => {
 
       
 
-      <Button variant='contained' style={themes[0]} onClick={(event) => handleClick(event, 'normal')}>Normal</Button>
-      <Button variant='contained' style={themes[1]} onClick={(event) => handleClick(event, 'low')}>Low</Button>
-      <Button variant='contained' style={themes[2]} onClick={(event) => handleClick(event, 'medium')}>Medium</Button>
-      <Button variant='contained' style={themes[3]} onClick={(event) => handleClick(event, 'high')}>High</Button>
-      <Button variant='contained' style={themes[4]} onClick={(event) => handleClick(event, 'extreme')}>Extreme</Button>
+      <Button variant='contained' style={themes[0]} onClick={(event) => handleClick(event, 'Normal')}>Normal</Button>
+      <Button variant='contained' style={themes[1]} onClick={(event) => handleClick(event, 'Low')}>Low</Button>
+      <Button variant='contained' style={themes[2]} onClick={(event) => handleClick(event, 'Medium')}>Medium</Button>
+      <Button variant='contained' style={themes[3]} onClick={(event) => handleClick(event, 'High')}>High</Button>
+      <Button variant='contained' style={themes[4]} onClick={(event) => handleClick(event, 'Extreme')}>Extreme</Button>
 
-        <Popup>
-            asdasdfasdf
-        </Popup>
+        <Popup/>
     </Container>
   );
 };
