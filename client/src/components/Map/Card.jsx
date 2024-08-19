@@ -16,8 +16,10 @@ const bull = (
   </Box>
 );
 
-const card = (
-  <React.Fragment>
+
+export default function CardComponent() {
+  return (
+    <React.Fragment>
     <CardContent style={{color:"#00ccff"}}>
       <HouseboatIcon style={{width: '20%', height: '20%', color: "inherit"}}/>
       <Typography variant="h1" sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
@@ -39,14 +41,5 @@ const card = (
       <Button size="small">Learn More</Button>
     </CardActions>
   </React.Fragment>
-);
-
-export default function Test() {
-  return (
-    <Box sx={{display:'flex',justifyContent: 'center', marginTopn: 2}}>
-        <Box sx={{ minWidth: 275 }}>
-        <Card variant="outlined" raised= {true} sx={{borderRadius:4}}>{card}</Card>
-        </Box>
-    </Box>
   );
 }

@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import axios from 'axios';
+import CardComponent from './Card'
 
 
 const TemporaryDrawer = ({ open, onToggleDrawer, level }) => {
@@ -32,9 +33,8 @@ const TemporaryDrawer = ({ open, onToggleDrawer, level }) => {
     if (open) {
       axios.get(`http://localhost:7000/${level}`)
         .then(response => {
-          handleList(response.data);
+          console.log(response.data);
         })
-  
         .catch(error => {
           console.error(error);
         });
@@ -43,32 +43,13 @@ const TemporaryDrawer = ({ open, onToggleDrawer, level }) => {
 
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation">
-      <List>
-      {[levellist].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+    <Box sx={{ width: 750 }} role="presentation">
+        <Box sx={{display:'flex', marginTopn: 2}}>
+        <Box sx={{ minWidth: 275 }}>
+        <CardComponent variant="outlined" raised= {true} sx={{ borderRadius: 4, height: 150, width: 150, borderColor: '#ff4d4d'}}/>
+        <Divider />
+        </Box>
+    </Box>
     </Box>
   );
  
