@@ -16,33 +16,36 @@ const TemporaryDrawer = ({ open, onToggleDrawer, level }) => {
   const [drawerFetch, setDrawerFetch] = useState(false);
   const toggleDrawer = (newOpen) => () => {
       setDrawerFetch(newOpen);
-    };
+      
+  };
 
-  useEffect(() => {
-    toggleDrawer(open)();
-    if (drawerFetch) {
-      const handlePopClick = () => {
-        return new Promise((resolve, reject) => {
-            axios.get(`http://localhost:7000/${level}`)
-              .then(response => {
-                
-                console.log(response.data);
-              })
-              .catch(error => {
-                reject(error);
-              });
-          });
-      };
-      console.log(handlePopClick());
+
+  const [levellist, setLevellist] = useState('');
+  const handleList= (levels) => {
+    setLevellist(levels);
+  }
+
+
+
+  useEffect(() => { 
+    console.log("drawer open is:", open);
+    if (open) {
+      axios.get(`http://localhost:7000/${level}`)
+        .then(response => {
+          handleList(response.data);
+        })
+  
+        .catch(error => {
+          console.error(error);
+        });
     }
-    
-  }, [open, toggleDrawer]);
+  }, [open]);
 
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={onToggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role="presentation">
       <List>
-      {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+      {[levellist].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -68,10 +71,10 @@ const TemporaryDrawer = ({ open, onToggleDrawer, level }) => {
       </List>
     </Box>
   );
-
+ 
   return (
     <div>
-      <Drawer open={drawerFetch} onClose={onToggleDrawer(false)}>
+      <Drawer open={open}>
         {DrawerList}
       </Drawer>
     </div>

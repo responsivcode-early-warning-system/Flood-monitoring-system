@@ -57,12 +57,11 @@ const usePopupState = () => {
   const Popup = () => {
     return (
       <BasePopup id={id} open={open} anchor={anchor} onClick={toggleDrawer(!drawerOpen)}>
-        <TemporaryDrawer open={drawerOpen} onToggleDrawer={toggleDrawer} level={poptext}/>
+        <TemporaryDrawer open={drawerOpen}  level={poptext}/>
         <PopupBody>{poptext}</PopupBody>
       </BasePopup>
     );
   };
-
   
   return {handleClick, Popup};
 };
