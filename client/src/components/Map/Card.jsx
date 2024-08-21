@@ -20,25 +20,26 @@ const bull = (
 
 const CardItem= ({key, items}) => {
   return(
-      <Box sx={{ width: 300 }} role="presentation">
-        <Box sx={{ml:'30px', display:'flex', marginTop: 2,  border: '2px solid grey', borderRadius: 4, borderColor: '#ff4d4d' }} height={250} width={200} my={4} display="flex" alignItems="center" gap={4} p={2}>
+      <Box sx={{ width: 350 }} role="presentation">
+        <Box sx={{ml:'30px', display:'flex', marginTop: 2,  border: '2px solid grey', borderRadius: 4, borderColor: '#ff4d4d' }} height={250} width={220} my={4} display="flex" alignItems="center" gap={4} p={2}>
         <Box sx={{ minWidth: 275 }} >
           <React.Fragment>
                 <CardContent style={{color:"#00ccff"}}>
                   <HouseboatIcon style={{width: '20%', height: '20%', color: "inherit"}}/>
                   <Typography variant="h1" sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
-                    NORMAL
+                    {items.DEVICE_ID}
                   </Typography>
                   <Typography variant= "subtitle2" color="text.secondary">
-                    {items.longitude}
+                   {parseFloat(items.LATTITUDE).toFixed(6)}, {parseFloat(items.LONGITUDE).toFixed(6)} 
+                    <br/>
+                  {items.LOCATION}
+
                   </Typography>
                   <Typography variant="h5" component="div">
-                    be{bull}nev{bull}o{bull}lent
+                    Water Level: {items.DIST_M}
                   </Typography>
                   <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                    {items.CAP_DATETIME}
                   </Typography>
                 </CardContent>
                 <CardActions>
