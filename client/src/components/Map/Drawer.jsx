@@ -12,17 +12,18 @@ import axios from 'axios';
 import CardList from './Card'
 
 const TemporaryDrawer = ({ open, level }) => {
-  const [levellist, setLevellist] = useState('');
-  const handleList= (levels) => {
-    setLevellist(levels);
-  }
+  const [level_list, setLevel_list] = useState('');
   
+  const handleList= (levels) => {
+    setLevel_list(levels);
+  }
+
   useEffect(() => { 
     console.log("drawer open is:", open);
     if (open) {
       axios.get(`http://localhost:7000/${level}`)
         .then(response => {
-          console.log(response.data);
+          handleList(response.data);
         })
         .catch(error => {
           console.error(error);
@@ -33,7 +34,7 @@ const TemporaryDrawer = ({ open, level }) => {
   return (
     <div>
       <Drawer open={open}>
-        <CardList/>
+        <CardList levels={level_list}/>        
       </Drawer>
     </div>
   );
