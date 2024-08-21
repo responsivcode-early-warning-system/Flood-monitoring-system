@@ -34,7 +34,7 @@ const TemporaryDrawer = ({ open, level }) => {
   return (
     <div>
       <Drawer open={open}>
-        <CardList levels={level_list}/>        
+        <CardList levels={level_list} theme={level}/>        
       </Drawer>
     </div>
   );

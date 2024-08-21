@@ -8,7 +8,13 @@ import Typography from '@mui/material/Typography';
 import HouseboatIcon from '@mui/icons-material/Houseboat';
 import Divider from '@mui/material/Divider';
 
-
+const themeColors = {
+  Normal: "#04dc04", // Green
+  Low: "#fcfc04", // Yellow
+  Medium: "#ffa500", // Orange
+  High: "#fc3c04", // Red
+  Extreme: "#e404fc" // Purple
+};
 const bull = (
   <Box
     component="span"
@@ -18,13 +24,13 @@ const bull = (
   </Box>
 );
 
-const CardItem= ({key, items}) => {
+const CardItem= ({theme, items}) => {
   return(
       <Box sx={{ width: 350 }} role="presentation">
         <Box sx={{ml:'30px', display:'flex', marginTop: 2,  border: '2px solid grey', borderRadius: 4, borderColor: '#ff4d4d' }} height={250} width={220} my={4} display="flex" alignItems="center" gap={4} p={2}>
         <Box sx={{ minWidth: 275 }} >
           <React.Fragment>
-                <CardContent style={{color:"#00ccff"}}>
+                <CardContent style={{color: themeColors[theme]}}>
                   <HouseboatIcon style={{width: '20%', height: '20%', color: "inherit"}}/>
                   <Typography variant="h1" sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
                     {items.DEVICE_ID}
@@ -54,7 +60,7 @@ const CardItem= ({key, items}) => {
   
 
 
-export default function CardList(list) {
+export default function CardList(list, theme) {
   const [cardlist, setCardList] =useState('');
   const handleCardlist= ()=> {
     setCardList(list);
@@ -65,14 +71,14 @@ export default function CardList(list) {
 
     if (list && list.levels !== "") {
       handleCardlist(list);
-      console.log("This is my list", list);
+      console.log("This is my list: ", list);
     }
-  }, [list]);
+  }, [list, theme]);
 
   return(
     <div>
       {cardlist && cardlist.levels.map((item, index) => (
-        <CardItem key={index} items= {item}/>
+        <CardItem key={index} items= {item} theme= {cardlist.theme}/>
       ))}
       <Divider />
     </div>
