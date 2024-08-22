@@ -9,56 +9,44 @@ require('dotenv').config()
 app.use(cors());
 app.use(express.json());
 
+const ranges = {
+  Normal: { min: 0, max: 5 },
+  Low: { min: 6, max: 10 },
+  Medium: { min: 11, max: 15 },
+  High: { min: 16, max: 20 },
+  Extreme: { min: 21, max: 50 }
+
+};
+
 // Example defining a route in Express
 app.get('/', (req, res) => {
   res.send('<h1>Hello, Express.js Server!</h1>');
 });
 
-function getbyLvl(sql, res){
-  con.query(sql, function(err, result) {
+function getAllLvl(sql, [min,max] ,res){
+  con.query(sql, [min, max], (err, results) => {
     if (err) {
-      console.error('Database query error:', err);
-      res.status(500).json({ error: 'Database query error' });
-      return;
+      console.error('error running query:', err);
+      return res.status(500).json({ error: err });
     }
-    console.log(result);
-    res.json(result);
+    res.json(results);
   });
 }
+app.get('/marker/:level', (req, res) => {
+  const {level} = req.params;
+
+  const { min, max } = ranges[level];
+  const sql =`SELECT settings. LATTITUDE, settings.LONGITUDE FROM latest INNER JOIN settings ON latest.DEVICE_ID= settings.DEVICE_ID WHERE DIST_M BETWEEN ? AND ?`;
+  getAllLvl(sql, [min, max], res);
+})
 
 app.get('/:level', (req, res) => {
-  const { level } = req.params;
-  let distance;
+  const {level} = req.params;
+  const { min, max } = ranges[level];
 
-  switch (level) {
-    case 'Normal':
-      min=0;
-      max = 5;
-      break;
-    case 'Low':
-      min = 6;
-      max=10;
-      break;
-    case 'Medium':
-      min = 11;
-      max=15;
-      break;
-    case 'High':
-      min = 16;
-      max=20;
-      break;
-    case 'Extreme':
-      min = 21;
-      max=40;
-      break;
-    default:
-      return res.status(400).json({ message: 'Invalid level parameter' });
-  }
-
-  const sql = `SELECT latest.DEVICE_ID, latest.CAP_DATETIME, latest.DIST_M, settings.LATTITUDE, settings.LONGITUDE, settings.LOCATION FROM latest INNER JOIN settings ON latest.DEVICE_ID = settings.DEVICE_ID WHERE DIST_M BETWEEN ${min} AND ${max} `;
-  getbyLvl(sql, res);
+  const sql = `SELECT latest.DEVICE_ID, latest.CAP_DATETIME, latest.DIST_M, settings.LATTITUDE, settings.LONGITUDE, settings.LOCATION FROM latest INNER JOIN settings ON latest.DEVICE_ID = settings.DEVICE_ID WHERE DIST_M BETWEEN ? AND ? `;
+  getAllLvl(sql, [min, max], res);
 });
-
 
 
 app.post('/register', (req, res) => {
