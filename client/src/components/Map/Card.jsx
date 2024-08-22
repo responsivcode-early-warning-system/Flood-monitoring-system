@@ -27,7 +27,7 @@ const bull = (
 const CardItem= ({theme, items}) => {
   return(
       <Box sx={{ width: 350 }} role="presentation">
-        <Box sx={{ml:'30px', display:'flex', marginTop: 2,  border: '2px solid grey', borderRadius: 4, borderColor: '#ff4d4d' }} height={250} width={220} my={4} display="flex" alignItems="center" gap={4} p={2}>
+        <Box sx={{ml:'30px', display:'flex', marginTop: 2,  border: '2px solid grey', borderRadius: 4, borderColor: themeColors[theme], boxShadow: 7 }} height={250} width={220} my={4} display="flex" alignItems="center" gap={4} p={2}>
         <Box sx={{ minWidth: 275 }} >
           <React.Fragment>
                 <CardContent style={{color: themeColors[theme]}}>
