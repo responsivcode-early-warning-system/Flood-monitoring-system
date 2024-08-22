@@ -55,7 +55,7 @@ app.get('/:level', (req, res) => {
       return res.status(400).json({ message: 'Invalid level parameter' });
   }
 
-  const sql = `SELECT DEVICE_ID, CAP_DATETIME, DIST_M, LOCATION, LATTITUDE, LONGITUDE FROM sensors WHERE DIST_M BETWEEN ${min} AND ${max} `;
+  const sql = `SELECT latest.DEVICE_ID, latest.CAP_DATETIME, latest.DIST_M, settings.LATTITUDE, settings.LONGITUDE, settings.LOCATION FROM latest INNER JOIN settings ON latest.DEVICE_ID = settings.DEVICE_ID WHERE DIST_M BETWEEN ${min} AND ${max} `;
   getbyLvl(sql, res);
 });
 
