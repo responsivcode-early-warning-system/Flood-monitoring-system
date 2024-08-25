@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext,useState, useEffect } from 'react';
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import LevelButtons  from './levelButtons';
 import normalIcon from './icons/gps.png';
@@ -7,7 +7,14 @@ import mediumIcon from './icons/gps(2).png';
 import highIcon from './icons/gps(3).png';
 import extremeIcon from './icons/gps(4).png';
 
+export const MarkerContext = React.createContext();
+export const LevelContext = React.createContext();
+
 const markerIcons = [normalIcon, lowIcon, mediumIcon, highIcon, extremeIcon];
+
+
+
+
 
 const mapStyles = {
   width: '95%',
@@ -29,36 +36,59 @@ const initPositions = [
   { lat: 10.312502887497425, lng: 123.89563874036453 }, // Another new position nearby
 ];
 
-export class MapContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  const MapMarker= (items, google)=> {
+  if (items.length > 0) {
+    return (
+        <div>
+        {items.map((item, index) => (
+          <Marker
+            key = {index}
+            position={{ lat: item.lat, lng: item.lng }}
+            icon={{
+              url: markerIcons[index],
+              scaledSize: new window.google.maps.Size(30, 30)
+            }}
+            google={props.google}
+          />
+            ))}
+        </div>
+    )
+  } else {
+    return null;
   }
-  
+}
 
-  render() {
+export const MapContainer = (props) => {
+    const [markers, setMarkers] = useState([]);
+  const [poptext, setPoptext] = useState('');
+
+
+    useEffect(() => {
+      console.log('marker has changed:', markers);
+    }, [markers]);
+  
     return (
       <Map 
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
+      google={props.google}
+      zoom={14}
         initialCenter={initposition}
         >   
-        {initPositions.map((position, index) => (
+          <MarkerContext.Provider value= {[markers, setMarkers]}>
+
+          <LevelButtons />
+          </MarkerContext.Provider>
+          {markers.map((marker, index) => (
           <Marker
             key={index}
-            position={position}
+            position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: markerIcons[index],
               scaledSize: new window.google.maps.Size(30, 30)
             }}
           />
         ))}
-        <LevelButtons />
-        
         </Map>
     );
-  }
 }
 
 export default GoogleApiWrapper({

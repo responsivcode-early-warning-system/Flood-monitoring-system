@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { styled } from '@mui/system';
 import TemporaryDrawer from './Drawer';
+import axios from 'axios';
+import { MarkerContext, LevelContext } from './Map';
 
 
 const grey = {
@@ -39,14 +41,33 @@ const PopupBody = styled('div')(
 
 const usePopupState = () => {
   const [anchor, setAnchor] = useState(null);
- const [poptext, setPoptext] = useState('');
+  const [poptext, setPoptext] = useState('');
 
   const open = Boolean(anchor);
   const id = open ? 'simple-popup' : undefined;
   const handleClick = (event, level) => {
     setAnchor(anchor ? null : event.currentTarget);
     setPoptext(`${level}`);
+
   };
+const [markers, setMarkers] = useContext(MarkerContext)
+
+const handleMarkers = (positions) => {
+  setMarkers(positions);
+};
+
+  useEffect(() => {
+    if (poptext !== ''){
+        axios.get(`http://localhost:7000/marker/${poptext}`)
+          .then(response => {
+            console.log('resonsse is', response.data);
+            handleMarkers(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    }
+  }, [poptext]);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = (newOpen) => () => {
@@ -56,9 +77,9 @@ const usePopupState = () => {
   const Popup = () => {
     return (
       <BasePopup id={id} open={open} anchor={anchor} onClick={toggleDrawer(!drawerOpen)}>
-        <TemporaryDrawer open={drawerOpen}  level={poptext}/>
+        <TemporaryDrawer open={drawerOpen} level={poptext} />
         <PopupBody>{poptext}</PopupBody>
-      </BasePopup>
+    </BasePopup>
     );
   };
   
