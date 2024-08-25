@@ -21,7 +21,7 @@ const TemporaryDrawer = ({ open, level }) => {
   useEffect(() => { 
     console.log("drawer open is:", open);
     if (open) {
-      axios.get(`http://localhost:7000/${level}`)
+      axios.get(`http://localhost:7000/list/${level}`)
         .then(response => {
           handleList(response.data);
         })
