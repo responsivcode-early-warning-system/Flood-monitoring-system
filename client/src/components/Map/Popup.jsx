@@ -41,15 +41,17 @@ const PopupBody = styled('div')(
 
 const usePopupState = () => {
   const [anchor, setAnchor] = useState(null);
-  const [poptext, setPoptext] = useState('');
+  
+  const [poptext, setPoptext] = useContext(LevelContext);
 
   const open = Boolean(anchor);
   const id = open ? 'simple-popup' : undefined;
   const handleClick = (event, level) => {
     setAnchor(anchor ? null : event.currentTarget);
     setPoptext(`${level}`);
-
   };
+
+
 const [markers, setMarkers] = useContext(MarkerContext)
 
 const handleMarkers = (positions) => {
