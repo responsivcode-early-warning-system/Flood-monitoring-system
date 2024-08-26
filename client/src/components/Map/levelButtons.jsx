@@ -36,9 +36,6 @@ const LevelButtons = () => {
 
     return (
     <Container maxWidth="md" style={{ position: 'absolute', bottom: 75, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10 }}>
-
-      
-
       <Button variant='contained' style={themes[0]} onClick={(event) => handleClick(event, 'Normal')}>Normal</Button>
       <Button variant='contained' style={themes[1]} onClick={(event) => handleClick(event, 'Low')}>Low</Button>
       <Button variant='contained' style={themes[2]} onClick={(event) => handleClick(event, 'Medium')}>Medium</Button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './components/Home.jsx';
 import Navbar from './components/Navbar.jsx';
-import RegistrationForm from './components/Signup.jsx'; // Remove the comment and import the SignupForm component
+import RegistrationForm from './components/Register/Signup.jsx'; // Remove the comment and import the SignupForm component
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import MapContainer from './components/Map/Map.jsx';
 import Test from './components/Test.jsx'
