@@ -5,18 +5,27 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 require('dotenv').config();
 
+app.use(cors());
+app.use(express.json());
+
 const userRouter = require('./routes/userRoutes');
 app.use(userRouter);
 const mapRouter = require('./routes/mapRoutes'); // Import the MapRoute module
 app.use(mapRouter);
 
 
-app.use(cors());
-app.use(express.json());
+
+
+// TODO: NOT SURE IF THIS IS SAFE !!!!!!! HOY!!!!! BAGUNAS!!!!!!
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 // Example defining a route in Express
 app.get('/', (req, res) => {
-  res.send('<h1>Hello, Express.js Server!</h1>');
 });
 
 const port = process.env.PORT; // You can use environment variables for port configuration

@@ -62,7 +62,7 @@ const handleMarkers = (positions) => {
     if (poptext !== ''){
         axios.get(`http://localhost:7000/marker/${poptext}`)
           .then(response => {
-            console.log('resonsse is', response.data);
+            console.log('markers are:', response.data);
             handleMarkers(response.data);
           })
           .catch(error => {
