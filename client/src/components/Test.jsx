@@ -1,52 +1,39 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
+import { Grid, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import HouseboatIcon from '@mui/icons-material/Houseboat';
+import { blue } from "@mui/material/colors";
+import OtpTimer from 'otp-timer';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
+const Test = () => {
+  const [showTimer, setShowTimer] = useState(false);
+  const handleClick = () => {
+    setShowTimer(true);
+    SendOTP();
+  };
 
-const card = (
-  <React.Fragment>
-    <CardContent style={{color:"#00ccff"}}>
-      <HouseboatIcon style={{width: '20%', height: '20%', color: "inherit"}}/>
-      <Typography variant="h1" sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
-        NORMAL
-      </Typography>
-      <Typography variant= "subtitle2" color="text.secondary">
-        Arrabal River Station
-      </Typography>
-      <Typography variant="h5" component="div">
-        be{bull}nev{bull}o{bull}lent
-      </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
-    </CardActions>
-  </React.Fragment>
-);
+  const SendOTP = () => {
+    console.log("OTP sent");
+  }
 
-export default function Test() {
-  return (
-    <Box sx={{display:'flex',justifyContent: 'center', marginTopn: 2}}>
-        <Box sx={{ minWidth: 275 }}>
-        <Card variant="outlined" raised= {true} sx={{borderRadius:4}}>{card}</Card>
-        </Box>
-    </Box>
-  );
+  const paperStyle= {padding: 20, height:100, width: 200, margin: '20px auto',  display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '7%'}
+  
+    return (
+        <Grid>
+            <Paper elevation ={10} style={paperStyle}>
+                <div>
+                    <h5>Enter your Contact number</h5>
+                    <input type="text" placeholder="Enter the your Contact Number to send One-Time-Password" />
+                    <Button style={{textAlign: 'center'}}color="secondary"  onClick={handleClick}>Submit</Button>
+                    <div style={{ color: '#ffffff', padding: '10px 20px', borderRadius: '5px', fontSize: '18px', fontWeight: 'bold', textAlign: 'center'}}>
+                    {showTimer && <OtpTimer seconds={10} />}
+
+                    </div>
+                </div>
+            </Paper>
+        </Grid>
+    )
 }
+
+
+export default Test;
