@@ -10,12 +10,12 @@ import { Link } from 'react-router-dom';
 import dotenv from 'dotenv';
 
 // Import the .env file
-
+// TODO: fix the theme
 function Home() {
 
     return (
           <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" style={{color: "#ff4d4d", backgroundColor:"#00ccff"}}>
+          <AppBar position="static" style={{color: "ff3300", backgroundColor:"00ccff"}}>
             <Toolbar>
               <IconButton
                 size="large"
