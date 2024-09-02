@@ -8,14 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import dotenv from 'dotenv';
+import { useTheme } from '@mui/material/styles';
 
-// Import the .env file
-// TODO: fix the theme
+// TODO: Import the .env file
 function Home() {
-
+    const theme =useTheme();
     return (
           <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" style={{color: "ff3300", backgroundColor:"00ccff"}}>
+          <AppBar position="static" style={{color: theme.palette.primary.main, backgroundColor:theme.palette.background.default}}>
             <Toolbar>
               <IconButton
                 size="large"
