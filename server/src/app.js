@@ -1,9 +1,11 @@
+const mqtt = require('mqtt');
 var express = require('express');
 var app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 require('dotenv').config();
+const mqttClient = require('./controller/mqtt');
 
 app.use(cors());
 app.use(express.json());
@@ -13,8 +15,7 @@ app.use(userRouter);
 const mapRouter = require('./routes/mapRoutes'); // Import the MapRoute module
 app.use(mapRouter);
 
-
-
+mqttClient.init();
 
 // TODO: NOT SURE IF THIS IS SAFE !!!!!!! HOY!!!!! BAGUNAS!!!!!!
 app.use(function(req, res, next) {
