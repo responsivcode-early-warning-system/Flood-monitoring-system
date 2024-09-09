@@ -1,4 +1,6 @@
 var con = require('../models/server.js');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 function generate_otp() {
   const min = 100000;
