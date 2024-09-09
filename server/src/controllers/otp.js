@@ -1,5 +1,5 @@
 const con= require("../models/server")
-
+const axios =require('axios')
 function generate_otp() {
   const min = 100000;
   const max = 999999;
@@ -25,22 +25,41 @@ async function SendSemaphore(message, number) {
       return { message: "Error sending OTP" };
     }
 }
+/*
+const ValidateOtp= (req, res)=> {
+  const otp= req.params;
+  
 
-async function SendOtp(req, res) {
+}
+*/
+const SendOtp = (req, res) => {
   const otp = generate_otp();
   // todo: chagne into sessions
-  const username = req.query.username; 
-  const mobileNumber=req.query.number 
-  const message = `Your One-Time`;
+  const username = req.body.username; 
+  const mobileNumber= req.body.number; 
+  const message = `Your One-Time is ${otp}}`;
+  
+  //SendSemaphore(message, mobileNumber);
 
-  const sql = 'INSERT INTO otp (username, otp) VALUES (?, ?)';
-  con.query(sql, [username, otp], (err, results)=> {
-    if (err) { 
+  const sqlInsert = 'INSERT IGNORE INTO otp (username, otp) VALUES (?, ?)';
+  con.query(sqlInsert, [username, otp], (err, results) => {
+    if (err) {
       console.error(err);
-      return res.status(500).json({error:err});
+      return res.status(500).json({ error: err });
     }
+    if (results.affectedRows === 0) {
+      const sqlUpdate = 'UPDATE otp SET otp = ? WHERE username = ?';
+      con.query(sqlUpdate, [otp, username], (err, results) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: err });
+        }
+        console.log("otp updated successfully")
+      });
+    } 
+    // Send OTP via Semaphore
     return res.json(results);
-  })
+  });
 };
 
-module.exports= (SendOtp);
+module.exports= {SendOtp};

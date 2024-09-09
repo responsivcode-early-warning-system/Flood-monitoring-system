@@ -4,21 +4,15 @@ import { Grid, Paper, Avatar } from '@mui/material';
 import Button from '@mui/material/Button';
 
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
+import { Link } from 'react-router-dom';
 
-import logo from './add-friend.png'
 
 
-const images = {
-  src: logo,
-  alt:'Logo'
-}
+
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     username: '',
-    firstname: '',
-    middlename: '',
-    lastname: '',
     contact: '',
     email: '',
     password: '',
@@ -39,7 +33,7 @@ const RegistrationForm = () => {
     return;
   }
   console.log(formData);
-  axios.post(`http://localhost:7000/register`, formData)
+  axios.post(`http://localhost:7000/otp`, formData)
     .then(response => {
       console.log(response);
     })
@@ -62,42 +56,6 @@ const RegistrationForm = () => {
                   type="text"
                   name="username"
                   value={formData.username}
-                  onChange={handleInputChange}
-                  required
-                  />
-              </div>
-              <div>
-                <label>Given Name:</label>
-                <br />
-
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  />
-              </div>
-              <div>
-                <label>Middle Name:</label>
-                <br />
-
-                <input
-                  type="text"
-                  name="middlename"
-                  value={formData.middlename}
-                  onChange={handleInputChange}
-                  required
-                  />
-              </div>
-              <div>
-                <label>Last Name:</label>
-                <br />
-
-                <input
-                  type="text"
-                  name="lastname"
-                  value={formData.lastname}
                   onChange={handleInputChange}
                   required
                   />
@@ -150,7 +108,9 @@ const RegistrationForm = () => {
                   required
                   />
               </div>
+              <Link to="/signup/signupotp" >
               <Button onClick={handleSubmit}>Submit</Button>
+              </Link>
             </form> 
           </Paper>
         </Grid>

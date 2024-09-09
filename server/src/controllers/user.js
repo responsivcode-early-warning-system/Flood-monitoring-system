@@ -1,46 +1,5 @@
 var con = require('../models/server.js');
 
-function generate_otp() {
-  const min = 100000;
-  const max = 999999;
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-registrationOTP = async (customer_id, contactNumber, type) => {
-  const otp = generating_otp();
-  const message = `Your One-Time`;
-
-  const mobileNumber = contactNumber;
-
-  const expirationTime = new Date();
-  expirationTime.setMinutes(expirationTime.getMinutes() + 5); // Correct expiration time
-
-  const body = {
-    apikey: process.env.SP_API_KEY,
-    number: mobileNumber,
-    message: message,
-  };
-
-  try {
-    await Otp_Storage.create({
-      otp_owner: customer_id,
-      otp_code: otp,
-      expiration: expirationTime,
-      type: type, // Include the type
-    });
-    const response = await axios.post("https://api.semaphore.co/api/v4/priority", body);
-    console.log(response.data);
-    if (response.status === 200) {
-      return { message: "OTP is successfully sent" };
-    } else {
-      console.error("Failed to send OTP via Semaphore:", response.data);
-      return { message: "Failed to send OTP" };
-    }
-  } catch (error) {
-    console.error("Error sending OTP via Semaphore:", error);
-    return { message: "Error sending OTP" };
-  }
-};
-
 const InsertUser = (req, res) => {
     const { username, firstname, middlename, lastname, contact, email, password, passwordConfirm } = req.body;
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './components/Home.jsx';
 import Navbar from './components/Navbar.jsx';
 import RegistrationForm from './components/Register/Signup.jsx'; // Remove the comment and import the SignupForm component
+import SignupOtp from './components/Register/SignupOTP.jsx';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import MapContainer from './components/Map/Map.jsx';
 import Test from './components/Test.jsx'
@@ -34,7 +35,7 @@ function App() {
             <Route exact path="/" element={<Home />} /> 
                 <Route exact path="/test" element={<Test />} /> // Use the correct component name
                 <Route exact path="/signup" element={<RegistrationForm/>} /> 
-                
+                <Route exact path ="/signup/signupotp" element= {<SignupOtp/>}/>
                 <Route exact path ='/map' element ={<MapContainer />}/>
             </Routes>
             </div>

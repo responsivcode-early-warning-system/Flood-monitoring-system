@@ -2,7 +2,7 @@
 var express = require('express');
 const router= express.Router();
 
-const {GetPosition, GetAllDetails}= require('../controller/map.js');
+const {GetPosition, GetAllDetails}= require('../controllers/map.js');
 
 
 router.get('/list/:level', GetAllDetails);
