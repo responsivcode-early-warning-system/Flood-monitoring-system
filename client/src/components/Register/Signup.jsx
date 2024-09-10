@@ -4,7 +4,6 @@ import { Grid, Paper, Avatar } from '@mui/material';
 import Button from '@mui/material/Button';
 
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
-import { Link } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
 
