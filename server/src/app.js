@@ -2,8 +2,7 @@
 var express = require('express');
 var app = express();
 const cors = require('cors');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+
 require('dotenv').config();
 //const mqttClient = require('./controller/mqtt');
 

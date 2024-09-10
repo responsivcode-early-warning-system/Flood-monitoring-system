@@ -6,14 +6,13 @@ import Button from '@mui/material/Button';
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
 import { Link } from 'react-router-dom';
 
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
-    contact: '',
+    number: '',
     email: '',
     password: '',
     passwordConfirm: '',
@@ -26,21 +25,22 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = (event) => {
-  event.preventDefault();
-  // Add your form submission logic here
-  if (formData.password !== formData.passwordConfirm) {
-    alert('Passwords do not match');
-    return;
-  }
-  console.log(formData);
-  axios.post(`http://localhost:7000/otp`, formData)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-};
+    event.preventDefault();
+    // Add your form submission logic here
+    if (formData.password !== formData.passwordConfirm) {
+      alert('Passwords do not match');
+      return;
+    }
+    axios.post(`http://localhost:7000/sendotp`, formData)
+      .then(response => {
+        console.log(response);
+        // Redirect to /signupotp after successful form submission
+        navigate('./signupotp', { state: { formData } });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   const paperStyle= {padding: 20, height:'70vh', width: 200, margin: '20px auto',  display: 'flex', justifyContent: 'center', alignItems: 'center',}
   return (
       <div className='Form'>
@@ -52,8 +52,7 @@ const RegistrationForm = () => {
               <div>
                 <label>Username:</label>
                 <br />
-                <input
-                  type="text"
+                <input                  type="text"
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
@@ -61,13 +60,13 @@ const RegistrationForm = () => {
                   />
               </div>
               <div>
-                <label>Contact:</label>
+                <label>number:</label>
                 <br />
 
                 <input
-                  type="contact"
-                  name="contact"
-                  value={formData.contact}
+                  type="number"
+                  name="number"
+                  value={formData.number}
                   onChange={handleInputChange}
                   required
                   />
@@ -108,9 +107,7 @@ const RegistrationForm = () => {
                   required
                   />
               </div>
-              <Link to="/signup/signupotp" >
-              <Button onClick={handleSubmit}>Submit</Button>
-              </Link>
+                <Button onClick={handleSubmit}>Submit</Button>
             </form> 
           </Paper>
         </Grid>
